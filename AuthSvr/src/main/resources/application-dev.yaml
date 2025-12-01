@@ -1,0 +1,15 @@
+server:
+  port: 8081
+starter:
+  host: localhost
+  port: 8081
+
+#jwt
+jwt:
+  secret: qd2131!@$*f1@dc^a12sd13332f1a#%@
+#redisson
+redisson:
+  address: redis://192.168.0.103:6379
+  password: redis
+springdoc:
+  show-actuator: true
