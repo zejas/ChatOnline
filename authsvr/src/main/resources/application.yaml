@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ssm
+    name: authsvr
   profiles:
     active: dev
   #jackson\u5E8F\u5217\u5316

@@ -15,12 +15,14 @@
     <description>ChatOnline</description>
     <packaging>pom</packaging>
     <modules>
-        <module>AuthSvr</module>
+        <module>authsvr</module>
+        <module>gateway</module>
+        <module>nacos</module>
     </modules>
 
     <properties>
         <java.version>21</java.version>
-        <spring-boot-version>3.4.7</spring-boot-version>
+        <spring-boot-version>4.0.0</spring-boot-version>
     </properties>
 
     <dependencyManagement>

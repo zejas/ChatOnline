@@ -7,10 +7,9 @@
         <artifactId>ChatOnline</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <groupId>com.spring</groupId>
-    <artifactId>AuthSvr</artifactId>
+    <artifactId>authsvr</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>AuthSvr</name>
+    <name>authsvr</name>
     <description>AuthSvr</description>
     <packaging>jar</packaging>
 
