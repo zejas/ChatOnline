@@ -6,10 +6,10 @@ starter:
 
 #jwt
 jwt:
-  secret: qd2131!@$*f1@dc^a12sd13332f1a#%@
+  secret:
 #redisson
 redisson:
   address: redis://192.168.0.103:6379
-  password: redis
+  password:
 springdoc:
   show-actuator: true

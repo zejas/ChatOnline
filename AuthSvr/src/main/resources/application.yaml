@@ -13,14 +13,14 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://192.168.0.103:3306/test
-    password: Service12!
-    username: service
+    password:
+    username:
   #redis
   data:
     redis:
       database: 0
       host: 192.168.0.103
-      password: redis
+      password:
         #\u8BBE\u7F6E\u8FDE\u63A5\u6C60\u6700\u5927\u8FDE\u63A5\u6570
         #\u8FDE\u63A5\u6C60\u6700\u5927\u963B\u585E\u7B49\u5F85\u65F6\u95F4
         #\u8FDE\u63A5\u6C60\u4E2D\u6700\u5C0F\u7A7A\u95F2\u8FDE\u63A5
