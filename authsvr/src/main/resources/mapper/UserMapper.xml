@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.spring.authsvr.mapper.UserMapper">
+<mapper namespace="com.zejas.authsvr.mapper.UserMapper">
     <update id="updateToken">
         update userinfo set
                             access_token=#{accessToken},
@@ -8,13 +8,13 @@
         where id=#{id}
 
     </update>
-    <select id="getUserById" resultType="com.spring.authsvr.model.po.User">
+    <select id="getUserById" resultType="com.zejas.authsvr.model.po.User">
         select * from user where id = #{id}
     </select>
-    <select id="getUserByName" resultType="com.spring.authsvr.model.po.User">
+    <select id="getUserByName" resultType="com.zejas.authsvr.model.po.User">
         select * from user where user_name = #{username}
     </select>
-    <select id="getUserInfoByUserId" resultType="com.spring.authsvr.model.po.UserInfo">
+    <select id="getUserInfoByUserId" resultType="com.zejas.authsvr.model.po.UserInfo">
         select * from userinfo where user_id = #{userId}
     </select>
 </mapper>
