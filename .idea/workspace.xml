@@ -5,23 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5fe10736-cd19-4e1d-9f2b-6640b04e170d" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/.idea/qaplug_profiles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/annotation/CheckPermission.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/annotation/CheckPermissionAspect.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/exception/GolbalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/exception/GolbalException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/exception/UserException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/exception/UserExceptionEnum.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/mapper/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/mapper/UserRoleMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/mapper/UserRoleMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/po/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/po/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/service/UserRoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/service/UserRoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/util/TokenUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/java/com/spring/authsvr/util/TokenUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authsvr/src/main/resources/mapper/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authsvr/src/main/resources/mapper/UserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gateway/src/main/java/com/spring/gateway/GatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gateway/src/main/java/com/spring/gateway/GatewayApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,28 +45,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/project/ChatOnline/nacos&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.archetype.catalogs&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.24949084&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/project/ChatOnline/nacos",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.archetype.catalogs",
+    "settings.editor.splitter.proportion": "0.24949084",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RebelAgentSelection">
     <selection>jr</selection>
   </component>
@@ -159,7 +145,7 @@
       <workItem from="1764577322515" duration="90000" />
       <workItem from="1764577438370" duration="2154000" />
       <workItem from="1764641196993" duration="12483000" />
-      <workItem from="1764727087912" duration="4414000" />
+      <workItem from="1764727087912" duration="8828000" />
     </task>
     <task id="LOCAL-00001" summary="update">
       <option name="closed" value="true" />
@@ -169,7 +155,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764580225136</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update">
+      <option name="closed" value="true" />
+      <created>1764731858335</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1764731858335</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
