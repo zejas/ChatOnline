@@ -3,8 +3,8 @@ package com.spring.authsvr.service;
 import com.spring.authsvr.exception.AuthException;
 import com.spring.authsvr.exception.AuthExceptionEnum;
 import com.spring.authsvr.mapper.UserMapper;
-import com.spring.authsvr.po.User;
-import com.spring.authsvr.po.UserInfo;
+import com.spring.authsvr.model.po.User;
+import com.spring.authsvr.model.po.UserInfo;
 import com.spring.authsvr.util.TokenUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,9 +43,9 @@ public class UserService {
     public Map<String, String> login(String username, String password) {
         Map<String, String> map = new HashMap<String, String>();
 
-        User user = getUserByName(username);
+        User user = tryGetUserByName(username);
         if (user == null) {
-            throw new AuthException(AuthExceptionEnum.USER_NOT_FOUND);
+            throw new AuthException(AuthExceptionEnum.AUTH_USER_NOT_FOUND);
         }
         UserInfo userInfo = userMapper.getUserInfoByUserId(user.getId());
 
@@ -56,6 +56,9 @@ public class UserService {
         String accessToken = tokenUtil.generateAccessToken(user.getId(), username);
         String refreshToken = tokenUtil.generateRefreshToken(user.getId(), username);
         userMapper.updateToken(userInfo.getId(), accessToken, refreshToken);
+
+        // 登录成功再同步到缓存
+        saveUserToRedis(user);
 
         //准备返回access_token
         map.put("access_token",accessToken);
@@ -103,6 +106,20 @@ public class UserService {
             }
         }
         return user;
+    }
+
+    private User tryGetUserByName(String username) {
+        User user = (User) redisTemplate.opsForValue().get(USER_KEY + username);
+        if (user == null) {
+            user = userMapper.getUserByName(username);
+        }
+        return user;
+    }
+
+    private void saveUserToRedis(User user) {
+        if(user != null) {
+            redisTemplate.opsForValue().setIfAbsent(USER_KEY + user.getUsername(), user,1L, TimeUnit.HOURS);
+        }
     }
 
 }

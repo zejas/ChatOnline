@@ -1,6 +1,6 @@
 package com.spring.authsvr.service;
 
-import com.spring.authsvr.vo.LoginUserVo;
+import com.spring.authsvr.model.vo.LoginUserVo;
 import com.spring.authsvr.event.LoginSuccessEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

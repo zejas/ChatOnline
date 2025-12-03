@@ -1,4 +1,4 @@
-package com.spring.authsvr.po;
+package com.spring.authsvr.model.po;
 
 import lombok.Data;
 

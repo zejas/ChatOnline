@@ -1,6 +1,6 @@
 package com.spring.authsvr.mapper;
 
-import com.spring.authsvr.po.UserRole;
+import com.spring.authsvr.model.po.UserRole;
 import org.apache.ibatis.annotations.Param;
 
 /**

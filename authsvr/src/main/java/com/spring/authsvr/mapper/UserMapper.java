@@ -1,7 +1,7 @@
 package com.spring.authsvr.mapper;
 
-import com.spring.authsvr.po.User;
-import com.spring.authsvr.po.UserInfo;
+import com.spring.authsvr.model.po.User;
+import com.spring.authsvr.model.po.UserInfo;
 import org.apache.ibatis.annotations.Param;
 
 /**

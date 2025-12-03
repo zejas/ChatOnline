@@ -1,6 +1,6 @@
 package com.spring.authsvr.event;
 
-import com.spring.authsvr.vo.LoginUserVo;
+import com.spring.authsvr.model.vo.LoginUserVo;
 import org.springframework.context.ApplicationEvent;
 
 /**
