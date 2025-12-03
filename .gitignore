@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### idea log ###
+/log/AuthSvr.error.log
+/log/AuthSvr.info.log
+/log/Gateway.error.log
+/log/Gateway.info.log
+/log/SsmSvr.error.log
+/log/SsmSvr.info.log
