@@ -17,7 +17,7 @@ import java.util.Map;
  * @date 2025/6/23 11:12
  */
 @RestControllerAdvice
-public class GolbalException {
+public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = AuthException.class)
     public R userException(AuthException e) {

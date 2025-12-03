@@ -1,4 +1,4 @@
-package com.spring.authsvr.vo;
+package com.spring.authsvr.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
