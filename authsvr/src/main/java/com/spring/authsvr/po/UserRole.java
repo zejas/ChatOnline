@@ -23,5 +23,5 @@ public class UserRole implements Serializable {
     private Long roleId;
     private Date createTime;
     private String roleName;
-    private String roleCode;
+    private Integer roleCode;
 }

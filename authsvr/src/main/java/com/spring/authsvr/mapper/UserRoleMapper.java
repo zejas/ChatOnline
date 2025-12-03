@@ -11,7 +11,5 @@ import org.apache.ibatis.annotations.Param;
  * @date 2025/7/15 17:00
  */
 public interface UserRoleMapper {
-
-    UserRole[] getUserRoleByUserId(@Param("userId") Long UserId);
-
+    UserRole[] getUserRoleByUserId(@Param("userId") Long userId);
 }

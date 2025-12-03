@@ -1,7 +1,7 @@
 package com.spring.authsvr.service;
 
-import com.spring.authsvr.exception.UserException;
-import com.spring.authsvr.exception.UserExceptionEnum;
+import com.spring.authsvr.exception.AuthException;
+import com.spring.authsvr.exception.AuthExceptionEnum;
 import com.spring.authsvr.mapper.UserRoleMapper;
 import com.spring.authsvr.po.UserRole;
 import org.apache.logging.log4j.LogManager;
@@ -26,9 +26,9 @@ public class UserRoleService {
 
     public UserRole[] getUserRoleByUserId(Long userId) {
         UserRole[] userRole = userRoleMapper.getUserRoleByUserId(userId);
-        if(userRole==null || userRole.length==0){
+        if(userRole == null || userRole.length==0){
             logger.info("此用户id:{}未列入权限管理",userId);
-            throw new UserException(UserExceptionEnum.USERROLE_NOT_CONTROL);
+            throw new AuthException(AuthExceptionEnum.AUTH_ROLE_NOT_FOUND);
         }
         return userRole;
     }

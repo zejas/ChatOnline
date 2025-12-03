@@ -1,23 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.spring.authsvr.mapper.UserMapper">
-    <insert id="setUser" useGeneratedKeys="true" keyProperty="id">
-        insert into user (user_name, age, accounts, hobbies)
-        VALUES
-            (#{user.username},
-             #{user.age},
-             #{user.accounts},
-             #{user.hobbies})
-    </insert>
-    <update id="setUserInfo" useGeneratedKeys="true" keyProperty="id">
-        insert into userinfo (user_id, phone, email, password,salt)
-        VALUES
-            (#{userinfo.userId},
-             #{userinfo.phone},
-             #{userinfo.email},
-             #{userinfo.password},
-             #{userinfo.salt})
-    </update>
     <update id="updateToken">
         update userinfo set
                             access_token=#{accessToken},
@@ -25,23 +8,6 @@
         where id=#{id}
 
     </update>
-    <update id="updateUserById" useGeneratedKeys="true" keyProperty="id">
-        update user set
-                        user_name=#{user.username},
-                        age=#{user.age},
-                        hobbies=#{user.hobbies},
-                        accounts=#{user.accounts}
-        where id=#{id}
-    </update>
-    <update id="updateUserInfoByUserId" useGeneratedKeys="true" keyProperty="id">
-        update userinfo set
-                            email=#{userinfo.email},
-                            phone=#{userinfo.phone},
-                            password=#{userinfo.password},
-                            salt=#{userinfo.salt}
-        where user_id=#{user_id}
-    </update>
-
     <select id="getUserById" resultType="com.spring.authsvr.po.User">
         select * from user where id = #{id}
     </select>

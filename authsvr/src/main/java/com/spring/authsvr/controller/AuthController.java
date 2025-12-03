@@ -1,20 +1,25 @@
 package com.spring.authsvr.controller;
 
-import com.spring.authsvr.annotation.CheckPermission;
+import com.spring.authsvr.common.AuthResponse;
 import com.spring.authsvr.common.R;
 import com.spring.authsvr.event.EventPublisher;
 import com.spring.authsvr.event.LoginSuccessEvent;
-import com.spring.authsvr.po.User;
+import com.spring.authsvr.exception.AuthException;
+import com.spring.authsvr.exception.AuthExceptionEnum;
+import com.spring.authsvr.po.UserRole;
+import com.spring.authsvr.service.UserRoleService;
 import com.spring.authsvr.service.UserService;
+import com.spring.authsvr.util.TokenUtil;
 import com.spring.authsvr.vo.LoginUserVo;
-import com.spring.authsvr.vo.RegisterUserVo;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 ;
 
@@ -27,13 +32,21 @@ import java.util.Map;
  */
 @Tag(name="用户",description = "用户信息CRUD操作")
 @RestController
-public class UserController {
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired
+    private UserRoleService userRoleService;
+
+    @Autowired
+    TokenUtil tokenUtil;
 
     @Autowired
     private UserService userService;
 
     @Autowired
     private EventPublisher eventPublisher;
+
 
     @Operation(summary = "登录")
     @PostMapping("/login")
@@ -56,21 +69,17 @@ public class UserController {
 
         return r;
     }
-
-    @Operation(summary = "注册用户")
-    @PostMapping("/register")
-    public R<String> register(@Valid @RequestBody RegisterUserVo userVo) {
-        userService.addUser(userVo);
-        return R.success("success");
+    @Operation(summary = "验证token")
+    @GetMapping("/validate")
+    public AuthResponse validate(@RequestHeader("Authorization") String token){
+        if(token == null || !token.startsWith("Bearer ")){
+            throw new AuthException(AuthExceptionEnum.AUTH_EMPTY);
+        }
+        Long userId = tokenUtil.verifyAccessToken(token.substring(7));
+        List<UserRole> userRoles = List.of(userRoleService.getUserRoleByUserId(userId));
+        List<Integer> roleCode = userRoles.stream().map(UserRole::getRoleCode).collect(Collectors.toList());
+        
+        return AuthResponse.success(true,userId,roleCode);
     }
-
-    @CheckPermission(permitType = {"manager","committer"})
-    @Operation(summary = "按照id查询用户")
-    @GetMapping("/user/{id}")
-    public R<User> getUser(@PathVariable("id")Long id) {
-        User user = userService.getUserById(id);
-        return R.success(user);
-    }
-
 
 }

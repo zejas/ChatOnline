@@ -1,20 +1,16 @@
 package com.spring.authsvr.service;
 
-import com.spring.authsvr.exception.UserException;
-import com.spring.authsvr.exception.UserExceptionEnum;
+import com.spring.authsvr.exception.AuthException;
+import com.spring.authsvr.exception.AuthExceptionEnum;
 import com.spring.authsvr.mapper.UserMapper;
 import com.spring.authsvr.po.User;
 import com.spring.authsvr.po.UserInfo;
 import com.spring.authsvr.util.TokenUtil;
-import com.spring.authsvr.vo.RegisterUserVo;
-import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Base64;
 import java.util.HashMap;
@@ -49,13 +45,13 @@ public class UserService {
 
         User user = getUserByName(username);
         if (user == null) {
-            throw new UserException(UserExceptionEnum.USER_NOT_FOUND);
+            throw new AuthException(AuthExceptionEnum.USER_NOT_FOUND);
         }
         UserInfo userInfo = userMapper.getUserInfoByUserId(user.getId());
 
         String requiredPass = TokenUtil.getSHA256(password,Base64.getDecoder().decode(userInfo.getSalt()));
         if (!requiredPass.equals(userInfo.getPassword())) {
-            throw new UserException(UserExceptionEnum.USER_AUTHENTICATION_FAILED);
+            throw new AuthException(AuthExceptionEnum.AUTH_FAILED);
         }
         String accessToken = tokenUtil.generateAccessToken(user.getId(), username);
         String refreshToken = tokenUtil.generateRefreshToken(user.getId(), username);
@@ -89,28 +85,6 @@ public class UserService {
         return user;
     }
 
-    @Transactional
-    public void addUser(@Valid RegisterUserVo userVo) {
-        if(getUserByName(userVo.getUsername().trim()) != null) {
-            throw new UserException(UserExceptionEnum.USER_HASBEEN_CREATED);
-        }
-
-        User user = new User();
-        BeanUtils.copyProperties(userVo, user);
-        UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(userVo, userInfo);
-
-        byte[] salt = TokenUtil.getSecureRandom(16);
-        userInfo.setPassword(TokenUtil.getSHA256(userInfo.getPassword(), salt));
-        userInfo.setSalt(Base64.getEncoder().encodeToString(salt));
-
-        userMapper.setUser(user);
-
-        userInfo.setUserId(user.getId());
-        userMapper.setUserInfo(userInfo);
-
-    }
-
     public User getUserByName(String name) {
         User user = (User)redisTemplate.opsForValue().get(USER_KEY + name);
         if(user == null) {
@@ -130,28 +104,5 @@ public class UserService {
         }
         return user;
     }
-
-    public void updateUser(RegisterUserVo userVo, Long userId) {
-        if(getUserByName(userVo.getUsername().trim()) != null) {
-            throw new UserException(UserExceptionEnum.USER_HASBEEN_CREATED);
-        }
-
-        User user = new User();
-        BeanUtils.copyProperties(userVo, user);
-        UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(userVo, userInfo);
-
-        byte[] salt = TokenUtil.getSecureRandom(16);
-        userInfo.setPassword(TokenUtil.getSHA256(userInfo.getPassword(), salt));
-        userInfo.setSalt(Base64.getEncoder().encodeToString(salt));
-        String username = userMapper.getUserById(userId).getUsername();
-
-        //先更新数据库，再删除redis，依靠读操作更新redis
-        userMapper.updateUserById(user,userId);
-        redisTemplate.delete(USER_KEY + userId);
-        redisTemplate.delete(USER_KEY + username);
-        userMapper.updateUserInfoByUserId(userInfo,userId);
-    }
-
 
 }

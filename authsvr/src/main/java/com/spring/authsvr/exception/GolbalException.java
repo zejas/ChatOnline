@@ -19,8 +19,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GolbalException {
 
-    @ExceptionHandler(value = UserException.class)
-    public R userException(UserException e) {
+    @ExceptionHandler(value = AuthException.class)
+    public R userException(AuthException e) {
         return R.fail(e.getCode(), e.getMsg(),"error");
     }
 
