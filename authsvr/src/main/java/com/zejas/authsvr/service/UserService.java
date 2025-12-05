@@ -6,8 +6,7 @@ import com.zejas.authsvr.mapper.UserMapper;
 import com.zejas.authsvr.model.po.User;
 import com.zejas.authsvr.model.po.UserInfo;
 import com.zejas.authsvr.util.TokenUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -24,10 +23,9 @@ import java.util.concurrent.TimeUnit;
  * @description
  * @date 2025/6/23 11:01
  */
+@Log4j2
 @Service
 public class UserService {
-
-    private Logger logger = LogManager.getLogger(UserService.class);
 
     public static final String USER_KEY = "user:";
 
@@ -75,7 +73,7 @@ public class UserService {
             synchronized (this) {
                 user = (User) redisTemplate.opsForValue().get(USER_KEY + id);
                 if(user == null) {
-                    logger.info("redis读取失败，尝试读取rds数据库");
+                    log.info("redis读取失败，尝试读取rds数据库");
                     user = userMapper.getUserById(id);
 
                     //写回到redis
@@ -95,7 +93,7 @@ public class UserService {
             synchronized (this) {
                 user = (User)redisTemplate.opsForValue().get(USER_KEY + name);
                 if(user == null) {
-                    logger.info("redis读取失败，尝试读取rds数据库");
+                    log.info("redis读取失败，尝试读取rds数据库");
                     user = userMapper.getUserByName(name);
 
                     //写回到redis，使用setIfAbsent是因为sychronized锁只限于单个jvm中，如果集群部署则无法实现

@@ -1,13 +1,14 @@
 package com.zejas.authsvr.config;
 
+import com.zejas.authsvr.common.CommonConfig;
 import org.redisson.Redisson;
 import org.redisson.config.Config;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.GenericJacksonJsonRedisSerializer;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 
 /**
  * <p>  </p>
@@ -25,23 +26,20 @@ public class RedisConfig {
      * @param redisConnectionFactory
      * @return
      */
-    @Value("${redisson.address}")
-    private String address;
-
-    @Value("${redisson.password}")
-    private String password;
+    @Autowired
+    private CommonConfig commonConfig;
 
     @Bean
-    public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory,GenericJacksonJsonRedisSerializer genericJacksonJsonRedisSerializer) {
+    public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
         RedisTemplate<Object,Object> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-        redisTemplate.setDefaultSerializer(genericJacksonJsonRedisSerializer);
+        redisTemplate.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
         return redisTemplate;
     }
     @Bean
     public Redisson redisson(){
         Config config = new Config();
-        config.useSingleServer().setAddress(address).setDatabase(0).setPassword(password);
+        config.useSingleServer().setAddress(commonConfig.getAddress()).setDatabase(0).setPassword(commonConfig.getPassword());
         return (Redisson) Redisson.create(config);
     }
 }

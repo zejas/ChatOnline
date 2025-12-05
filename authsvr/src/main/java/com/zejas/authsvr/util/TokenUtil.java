@@ -5,11 +5,11 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.zejas.authsvr.common.CommonConfig;
 import com.zejas.authsvr.exception.AuthException;
 import com.zejas.authsvr.exception.AuthExceptionEnum;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.security.MessageDigest;
@@ -25,13 +25,11 @@ import java.util.Base64;
  * @description
  * @date 2025/7/15 16:22
  */
+@Log4j2
 @Component
 public class TokenUtil {
-
-    private static Logger logger = LogManager.getLogger(TokenUtil.class);
-
-    @Value("${jwt.secret}")
-    private String secret;
+    @Autowired
+    private CommonConfig commonConfig;
 
     public static String getSHA256(String password, byte[] salt){
         MessageDigest sha256 = null;
@@ -54,7 +52,7 @@ public class TokenUtil {
 
     public String generateAccessToken(Long userId, String username) {
 
-        Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
 
         return JWT.create()
                 .withClaim("user_id",userId)
@@ -64,7 +62,7 @@ public class TokenUtil {
     }
 
     public String generateRefreshToken(Long userId, String username) {
-        Algorithm algorithm = Algorithm.HMAC256(secret);
+        Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
 
         return JWT.create()
                 .withClaim("user_id",userId)
@@ -77,14 +75,14 @@ public class TokenUtil {
     public Long verifyAccessToken(String token) {
         DecodedJWT jwt;
         try {
-            Algorithm algorithm = Algorithm.HMAC256(secret);
+            Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
             JWTVerifier verifier = JWT.require(algorithm)
                     .build();
             jwt = verifier.verify(token);
 
             return jwt.getClaim("user_id").asLong();
         }catch (JWTVerificationException e) {
-            logger.info("JWT verification failed,{}", e.getMessage());
+            log.info("JWT verification failed,{}", e.getMessage());
             throw new AuthException(AuthExceptionEnum.AUTH_FAILED);
         }
     }

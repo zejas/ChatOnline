@@ -14,7 +14,7 @@
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5level %logger{36} -  %encode{%m}{CRLF}%n"/>
         </Console>
 
-        <RollingFile name="info" fileName="${LOG_HOME}/${LOG_INFO_FILE}.log" filePattern="{LOG_HOME}/${LOG_INFO_FILE}-%d{yyyy-MM-dd}-%i.log.tar.gz">
+        <RollingFile name="info" fileName="${LOG_HOME}/${LOG_INFO_FILE}.log" filePattern="${LOG_HOME}/${LOG_INFO_FILE}-%d{yyyy-MM-dd}-%i.log.tar.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5level %logger{36} -  %encode{%m}{CRLF}%n"/>
             <Filters>
                 <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
@@ -28,7 +28,7 @@
 
         </RollingFile>
 
-        <RollingFile name="error" fileName="${LOG_HOME}/${LOG_ERROR_FILE}.log" filePattern="{LOG_HOME}/${LOG_ERROR_FILE}-%d{yyyy-MM-dd}-%i.log.tar.gz">
+        <RollingFile name="error" fileName="${LOG_HOME}/${LOG_ERROR_FILE}.log" filePattern="${LOG_HOME}/${LOG_ERROR_FILE}-%d{yyyy-MM-dd}-%i.log.tar.gz">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss SSS} [%t] %-5level %logger{36} -  %encode{%m}{CRLF}%n"/>
             <Filters>
                 <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>

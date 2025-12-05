@@ -1,13 +1,13 @@
 spring:
   application:
     name: gateway
+  profiles:
+    active: dev
+  config:
+    import: nacos:nacos:${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
   cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: authToken
-              uri: lb://authsvr
-              predicates:
-#jwt
-jwt:
+    nacos:
+      server-addr: 192.168.0.103:8848
+      config:
+        group: DEV_GROUP
+        file-extension: yaml

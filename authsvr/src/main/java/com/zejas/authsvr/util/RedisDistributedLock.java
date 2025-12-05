@@ -1,8 +1,7 @@
 package com.zejas.authsvr.util;
 
 import lombok.SneakyThrows;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.script.DefaultRedisScript;
 
@@ -20,11 +19,10 @@ import java.util.concurrent.locks.Lock;
  * @description
  * @date 2025/8/3 13:07
  */
+@Log4j2
 public class RedisDistributedLock implements Lock {
 
     private final Timer timer = new Timer(true);
-
-    private Logger logger = LogManager.getLogger(RedisDistributedLock.class);
 
     private StringRedisTemplate redisTemplate;
 
@@ -77,7 +75,7 @@ public class RedisDistributedLock implements Lock {
     @Override
     public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
         if (time == -1){
-            logger.info("trylock: lockKey:{},uuidValue:{}", lockKey, uuidValue);
+            log.info("trylock: lockKey:{},uuidValue:{}", lockKey, uuidValue);
             //加锁lua脚本
             String lockScript = "if redis.call('exists',KEYS[1]) == 0 or redis.call('hexists',KEYS[1],KEYS[2]) == 1 then " +
                     "redis.call('hincrby',KEYS[1],ARGV[1],1) " +

@@ -7,12 +7,10 @@ import com.zejas.authsvr.event.LoginSuccessEvent;
 import com.zejas.authsvr.exception.AuthException;
 import com.zejas.authsvr.exception.AuthExceptionEnum;
 import com.zejas.authsvr.model.po.UserRole;
+import com.zejas.authsvr.model.vo.LoginUserVo;
 import com.zejas.authsvr.service.UserRoleService;
 import com.zejas.authsvr.service.UserService;
 import com.zejas.authsvr.util.TokenUtil;
-import com.zejas.authsvr.model.vo.LoginUserVo;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +28,6 @@ import java.util.stream.Collectors;
  * @description
  * @date 2025/6/23 10:45
  */
-@Tag(name="用户",description = "用户信息CRUD操作")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -48,7 +45,6 @@ public class AuthController {
     private EventPublisher eventPublisher;
 
 
-    @Operation(summary = "登录")
     @PostMapping("/login")
     public R login(@Valid @RequestBody LoginUserVo loginUserVo){
         R r = null;
@@ -69,7 +65,6 @@ public class AuthController {
 
         return r;
     }
-    @Operation(summary = "验证token")
     @GetMapping("/validate")
     public AuthResponse validate(@RequestHeader("Authorization") String token){
         if(token == null || !token.startsWith("Bearer ")){

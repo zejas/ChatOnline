@@ -3,8 +3,6 @@ package com.zejas.authsvr;
 import com.zejas.authsvr.util.DistributedLockFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.redisson.Redisson;
-import org.redisson.api.RLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -41,8 +39,8 @@ public class NIOTests {
     @Autowired
     DistributedLockFactory distributedLockFactory;
 
-    @Autowired
-    Redisson redisson;
+//    @Autowired
+//    Redisson redisson;
 
     @Test
     public void test() throws IOException {
@@ -147,19 +145,19 @@ public class NIOTests {
         //业务处理
 
     }
-    @Test
-    public void test6() {
-        RLock lock = redisson.getLock("redisLock");
-        lock.lock(30,TimeUnit.SECONDS);
-        try {
-            TimeUnit.SECONDS.sleep(30);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        if(lock.isLocked() && lock.isHeldByCurrentThread()){
-            lock.unlock();
-        }
-
-    }
+//    @Test
+//    public void test6() {
+//        RLock lock = redisson.getLock("redisLock");
+//        lock.lock(30,TimeUnit.SECONDS);
+//        try {
+//            TimeUnit.SECONDS.sleep(30);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        if(lock.isLocked() && lock.isHeldByCurrentThread()){
+//            lock.unlock();
+//        }
+//
+//    }
 
 }
