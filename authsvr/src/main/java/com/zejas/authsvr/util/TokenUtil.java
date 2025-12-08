@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.zejas.authsvr.common.CommonConfig;
+import com.zejas.authsvr.common.CommonProperties;
 import com.zejas.authsvr.exception.AuthException;
 import com.zejas.authsvr.exception.AuthExceptionEnum;
 import lombok.extern.log4j.Log4j2;
@@ -29,7 +29,7 @@ import java.util.Base64;
 @Component
 public class TokenUtil {
     @Autowired
-    private CommonConfig commonConfig;
+    private CommonProperties commonProperties;
 
     public static String getSHA256(String password, byte[] salt){
         MessageDigest sha256 = null;
@@ -52,7 +52,7 @@ public class TokenUtil {
 
     public String generateAccessToken(Long userId, String username) {
 
-        Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
+        Algorithm algorithm = Algorithm.HMAC256(commonProperties.getSecret());
 
         return JWT.create()
                 .withClaim("user_id",userId)
@@ -62,7 +62,7 @@ public class TokenUtil {
     }
 
     public String generateRefreshToken(Long userId, String username) {
-        Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
+        Algorithm algorithm = Algorithm.HMAC256(commonProperties.getSecret());
 
         return JWT.create()
                 .withClaim("user_id",userId)
@@ -75,7 +75,7 @@ public class TokenUtil {
     public Long verifyAccessToken(String token) {
         DecodedJWT jwt;
         try {
-            Algorithm algorithm = Algorithm.HMAC256(commonConfig.getSecret());
+            Algorithm algorithm = Algorithm.HMAC256(commonProperties.getSecret());
             JWTVerifier verifier = JWT.require(algorithm)
                     .build();
             jwt = verifier.verify(token);

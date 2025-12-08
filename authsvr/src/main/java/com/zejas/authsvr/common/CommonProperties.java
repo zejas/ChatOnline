@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RefreshScope
 @Data
 @Component
-public class CommonConfig {
+public class CommonProperties {
 
     @Value("${jwt.secret}")
     private String secret;
@@ -25,4 +25,5 @@ public class CommonConfig {
 
     @Value("${redisson.password}")
     private String password;
+
 }

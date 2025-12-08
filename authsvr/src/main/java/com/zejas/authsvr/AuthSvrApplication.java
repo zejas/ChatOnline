@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.zejas.authsvr.mapper")
 @SpringBootApplication
 public class AuthSvrApplication {
-
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(AuthSvrApplication.class);
         System.setProperty("nacos.logging.default.config.enabled","false");

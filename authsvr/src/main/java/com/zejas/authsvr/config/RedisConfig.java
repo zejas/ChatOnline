@@ -1,8 +1,6 @@
 package com.zejas.authsvr.config;
 
-import com.zejas.authsvr.common.CommonConfig;
-import org.redisson.Redisson;
-import org.redisson.config.Config;
+import com.zejas.authsvr.common.CommonProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +25,7 @@ public class RedisConfig {
      * @return
      */
     @Autowired
-    private CommonConfig commonConfig;
+    private CommonProperties commonProperties;
 
     @Bean
     public RedisTemplate<Object,Object> redisTemplate(RedisConnectionFactory redisConnectionFactory){
@@ -36,10 +34,10 @@ public class RedisConfig {
         redisTemplate.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
         return redisTemplate;
     }
-    @Bean
-    public Redisson redisson(){
-        Config config = new Config();
-        config.useSingleServer().setAddress(commonConfig.getAddress()).setDatabase(0).setPassword(commonConfig.getPassword());
-        return (Redisson) Redisson.create(config);
-    }
+//    @Bean
+//    public Redisson redisson(){
+//        Config config = new Config();
+//        config.useSingleServer().setAddress(commonProperties.getAddress()).setDatabase(0).setPassword(commonConfig.getPassword());
+//        return (Redisson) Redisson.create(config);
+//    }
 }

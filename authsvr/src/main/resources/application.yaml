@@ -11,3 +11,5 @@ spring:
       config:
         group: DEV_GROUP
         file-extension: yaml
+server:
+  port: 8081

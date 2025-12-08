@@ -5,7 +5,7 @@
                    https://logging.apache.org/xml/ns
                    https://logging.apache.org/xml/ns/log4j-config-2.xsd">
     <Properties>
-        <Property name="LOG_HOME" value="log"/>
+        <Property name="LOG_HOME" value="AuthLog"/>
         <Property name="LOG_INFO_FILE" value="AuthSvr.info"/>
         <Property name="LOG_ERROR_FILE" value="AuthSvr.error"/>
     </Properties>

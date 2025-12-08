@@ -29,7 +29,7 @@ public class ApiTimeGlobalFilter implements GlobalFilter, Ordered {
             if(beginTime != null){
                 log.info("访问接口主机:{}",exchange.getRequest().getURI().getHost()+":"+exchange.getRequest().getURI().getPort());
                 log.info("访问接口url:{}",exchange.getRequest().getURI().getPath());
-                log.info("访问接口时长:{}",System.currentTimeMillis()-beginTime);
+                log.info("访问接口时长:{}ms",System.currentTimeMillis()-beginTime);
                 log.info("=======================api===================");
             }
         }));
